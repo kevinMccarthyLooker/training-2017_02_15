@@ -4,14 +4,12 @@ include: "*.view" # include all the views
 
 include: "*.dashboard" # include all the dashboards
 
-datagroup: training_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
-
 persist_with: training_default_datagroup
 
+
 explore: users {}
+
+#adding a comment
 
 explore: order_items {
   #To Do: Add distribution_centers join to this explore
@@ -27,4 +25,12 @@ explore: order_items {
     sql_on: ${order_items.inventory_item_id} = ${inventory_items.id} ;;
     relationship: many_to_one
   }
+}
+
+
+
+
+datagroup: training_default_datagroup {
+  sql_trigger: SELECT MAX(id) FROM public.users;;
+  max_cache_age: "1 hour"
 }
